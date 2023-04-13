@@ -12,7 +12,7 @@ const BookSchema = new Schema({
 // virtual for the book's url
 BookSchema.virtual("url").get(function () {
   // We don't use an arrow function as we'll need the this object
-  return `/catalog/book${this._id})}`;
+  return `/catalog/book/${this._id}`;
 });
 
 module.exports = mongoose.model("Book", BookSchema);
