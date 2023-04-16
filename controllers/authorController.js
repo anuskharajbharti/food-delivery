@@ -118,7 +118,6 @@ exports.author_create_post = [
 ];
 
 // Display Author delete form on GET.
-// Display Author delete form on GET.
 exports.author_delete_get = asyncHandler(async (req, res, next) => {
   // Get details of author and all their books (in parallel)
   const [author, allBooksByAuthor] = await Promise.all([
@@ -138,7 +137,6 @@ exports.author_delete_get = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Handle Author delete on POST.
 // Handle Author delete on POST.
 exports.author_delete_post = asyncHandler(async (req, res, next) => {
   // Get details of author and all their books (in parallel)
