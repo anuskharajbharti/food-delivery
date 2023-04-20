@@ -140,6 +140,7 @@ exports.genre_delete_post = asyncHandler(async (req, res, next) => {
     return;
   } else {
     // Genre has no books. Delete object and redirect to the list of genres.
+    console.log(req.body.genreid);
     await Genre.findByIdAndRemove(req.body.genreid);
     res.redirect("/catalog/genres");
   }
