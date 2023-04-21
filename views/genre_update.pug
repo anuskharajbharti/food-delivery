@@ -1,0 +1,12 @@
+extend layout 
+
+block content 
+
+    h1 #{title}
+    p #{genre_id}
+
+    form(action="", method="post") 
+        div.form-group
+            input#genreid.form-control(type='hidden' name="genreid" required='true', value=genre_id)
+            input#newname.form-control(name="newname" required='true')
+        button.btn.btn-primary(type="submit") Update
