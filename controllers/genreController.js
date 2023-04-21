@@ -147,12 +147,27 @@ exports.genre_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 // Display Genre update form on GET.
-exports.genre_update_get = (req, res) => {
+exports.genre_update_get = asyncHandler(async (req, res, next) => {
+  const genre_detail = await Genre.findById(req.params.id);
+  // res.send(genre_detail);
+
+  if (genre_detail == null) {
+    res.redirect("/catlog/genres");
+  }
+
   res.render("genre_update", {
     title: "Update Genre",
-    genre_id: req.params.id,
+    genre_detail: genre_detail,
   });
-};
+});
+
+// (req, res) => {
+
+//   res.render("genre_update", {
+//     title: "Update Genre",
+//     genre_id: req.params.id,
+//   });
+// };
 
 // Handle Genre update on POST.
 exports.genre_update_post = (req, res) => {
