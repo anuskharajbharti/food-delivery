@@ -3,15 +3,18 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
 const mongoose = require("mongoose");
+
+require("dotenv").config();
+
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb://localhost/local_library";
+
+const MONGO_URI = process.env.MONGO_URI;
 
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(mongoDB);
+  await mongoose.connect(MONGO_URI);
   console.log("MongoDB Connected!");
 }
 
