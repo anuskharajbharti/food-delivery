@@ -163,6 +163,7 @@ exports.author_delete_post = asyncHandler(async (req, res, next) => {
 // Display Author update form on GET.
 exports.author_update_get = asyncHandler(async (req, res, next) => {
   const author_detail = await Author.findById(req.params.id);
+
   if (author_detail == null) {
     res.redirect("/catalog/authors");
   }
@@ -202,33 +203,36 @@ exports.author_update_post = [
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-    const author = new Author();
+    const updatedAuthor = {};
 
     // Check if first_name is provided in req.body
     if (req.body.first_name) {
-      author.first_name = req.body.first_name;
+      updatedAuthor.first_name = req.body.first_name;
     }
 
     // Check if family_name is provided in req.body
     if (req.body.family_name) {
-      author.family_name = req.body.family_name;
+      updatedAuthor.family_name = req.body.family_name;
     }
 
     // Check if date_of_birth is provided in req.body
     if (req.body.date_of_birth) {
-      author.date_of_birth = req.body.date_of_birth;
+      updatedAuthor.date_of_birth = req.body.date_of_birth;
     }
 
     // Check if date_of_death is provided in req.body
     if (req.body.date_of_death) {
-      author.date_of_death = req.body.date_of_death;
+      updatedAuthor.date_of_death = req.body.date_of_death;
     }
 
     if (!errors.isEmpty()) {
-      res.send("author update error");
+      return res.send("author update error");
     } else {
-      await author.save();
-      res.redirect(author.url);
+      await Author.updateOne({ _id: req.body.authorid }, updatedAuthor, {
+        new: true,
+      });
+
+      res.redirect("/catalog/authors");
     }
   }),
 ];

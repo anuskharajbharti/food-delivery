@@ -124,11 +124,67 @@ exports.bookinstance_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 // Display BookInstance update form on GET.
-exports.bookinstance_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: BookInstance update GET");
-};
+exports.bookinstance_update_get = asyncHandler(async (req, res, next) => {
+  const allBooks = await Book.find({}, "title").exec();
+
+  const bookInstaceDetails = await BookInstance.findById(req.params.id)
+    .populate("book")
+    .exec();
+
+  res.render("bookinstance_update", {
+    title: "Update BookInstance: " + req.params.id,
+    book_list: allBooks,
+    bookinstance_details: bookInstaceDetails,
+  });
+});
 
 // Handle bookinstance update on POST.
-exports.bookinstance_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: BookInstance update POST");
-};
+exports.bookinstance_update_post = [
+  // Validate and sanitize fields.
+  body("book", "Book must be specified")
+    .optional()
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("imprint", "Imprint must be specified")
+    .optional()
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("status").escape().optional(),
+  body("due_back", "Invalid date")
+    .optional({ checkFalsy: true })
+    .isISO8601()
+    .toDate(),
+
+  asyncHandler(async (req, res, next) => {
+    const errror = validationResult(req);
+    const updatedBookInstance = {};
+
+    if (req.body.book) {
+      updatedBookInstance.book = req.body.book;
+    }
+    if (req.body.imprint) {
+      updatedBookInstance.imprint = req.body.imprint;
+    }
+
+    if (req.body.due_back) {
+      updatedBookInstance.due_back = req.body.due_back;
+    }
+
+    if (req.body.status) {
+      updatedBookInstance.status = req.body.status;
+    }
+
+    if (!errror.isEmpty()) {
+      res.send("bookinnstacen update error");
+    } else {
+      await BookInstance.updateOne(
+        { _id: req.body.bookinstanceid },
+        updatedBookInstance,
+        { new: true }
+      );
+      res.redirect("/catalog/bookinstances");
+    }
+  }),
+];
