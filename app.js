@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
-
+const RateLimit = require("express-rate-limit");
 require("dotenv").config();
 
 mongoose.set("strictQuery", false);
@@ -26,6 +26,15 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+
+// rate limit
+const Limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 min
+  max: 20,
+});
+
+// apply rate limiter to all requests
+app.use(Limiter);
 
 app.use(logger("dev"));
 app.use(express.json());
