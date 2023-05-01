@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+  div.menu
+    h1 #{title}
+
+    each item in item_list
+        .menu-item  
+            .text
+                h3= item.name
+                p= item.description
+                p Price: $#{item.price.toFixed(2)}
+                a(href=item.url) Buy
+            img(src=`/images/${item.image}.jpg`) 
+
+

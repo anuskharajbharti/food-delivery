@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1.text-center #{title}
+
+    if !menuItem
+        p Invalid menu item.
+    else
+        .container
+            .cart-item
+                .cart.menu-item
+                //- p #{qunatity}
+                p #{quantity}
+                img(src=`/images/${menuItem.image}.jpg` style="width: 100px")
+                h2 #{menuItem.name}
+                p.description= menuItem.description
+                div 
+                    p $#{menuItem.price}
+                    p x#{quantity}
+                    hr
+                    p $#{(menuItem.price * quantity).toFixed(2)}
+
+            .cart-form
+                form(method='POST' action='/cart/checkout')
+                    button.btn.btn-primary(type='submit') Checkout

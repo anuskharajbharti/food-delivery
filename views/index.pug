@@ -1,19 +1,51 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #[em LocalLibrary], a very basic Express website developed as a tutorial example on the MDN.
+  .index-container
+    .jumbotron
+      h1.text-center Welcome to my Food Delivery App
+      p.text-center.order-now 
+        a.btn-nav(href='/menu') Order Now
+      p.text-center.order-now
 
-  h1 Dynamic content
+    .container-fluid
+      .row
+        each category in categories
+          .col-md-4
+            .card.mb-4.box-shadow
+              img.card-img-top(src=`/images/${category.name}.jpg`)
+              .card-body
+                h5.card-title= category.name
+                p.card-text= category.description
+                a.btn.btn-secondary(href=`/menu`) View Menu
 
-  if error
-    p Error getting dynamic content.
-  else
-    p The library has the following record counts:
+    .container
+      .row.featurette.mt-5
+        .col-md-7.order-md-2
+          h2.featurette-heading Delightful food delivered to your doorstep.
+          p.lead We bring you the best food from the best restaurants in town. Browse our menu, place an order and sit back while we deliver it to you.
+        .col-md-5.order-md-1
+          img(src='/images/delivery.jpg' style="width:300px")
 
-    ul
-      li #[strong Books:] !{data.book_count}
-      li #[strong Copies:] !{data.book_instance_count}
-      li #[strong Copies available:] !{data.book_instance_available_count}
-      li #[strong Authors:] !{data.author_count}
-      li #[strong Genres:] !{data.genre_count}
+    .container-fluid.bg-dark.text-light.p-5
+      .row
+        .col-md-4
+          h4.text-center About Us
+          p.text-center We are a food delivery service committed to providing delicious meals to your doorstep. With our easy-to-use app, you can browse menus from local restaurants and place orders in just a few taps. Our drivers will then deliver your meal to you quickly and efficiently.
+        .col-md-4
+          h4.text-center Contact Us
+          p.text-center
+            i.fas.fa-phone-alt.mr-2
+            | 1-800-123-4567
+          p.text-center
+            i.fas.fa-envelope.mr-2
+            | info@fooddeliveryapp.com
+        .col-md-4
+          h4.text-center Follow Us
+          p.text-center
+            a(href='#')
+              i.fab.fa-facebook-f.fa-2x.mr-3
+            a(href='#')
+              i.fab.fa-twitter.fa-2x.mr-3
+            a(href='#')
+              i.fab.fa-instagram.fa-2x.mr-3

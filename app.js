@@ -4,12 +4,15 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
-const RateLimit = require("express-rate-limit");
 require("dotenv").config();
 
 mongoose.set("strictQuery", false);
 
-const MONGO_URI = process.env.MONGO_URI;
+// const MONGO_URI = process.env.MONGO_URI;
+// const MONGO_URI = "mongodb://localhost/food-delivery";
+
+const MONGO_URI =
+  "mongodb+srv://rishawraj0703:ZllsDjgFaUn8HPOZ@local-library-prod.0pq10mq.mongodb.net/local-library-db?retryWrites=true&w=majority";
 
 main().catch((err) => console.log(err));
 
@@ -19,22 +22,13 @@ async function main() {
 }
 
 var indexRouter = require("./routes/index");
-const catalogRouter = require("./routes/catalog");
+// const catalogRouter = require("./routes/catalog");
 
 var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-
-// rate limit
-const Limiter = RateLimit({
-  windowMs: 1 * 60 * 1000, // 1 min
-  max: 20,
-});
-
-// apply rate limiter to all requests
-app.use(Limiter);
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -44,7 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // routers
 app.use("/", indexRouter);
-app.use("/catalog", catalogRouter);
+// app.use("/catalog", catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
