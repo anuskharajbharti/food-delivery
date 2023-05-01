@@ -90,6 +90,23 @@ footer {
 .order-now a {
   margin-right: 15px;
 }
+.order-now .btn-nav {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #333333;
+  border: 2px solid #333333;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.order-now .btn-nav:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
 
 .card {
   border: none;
@@ -147,7 +164,7 @@ footer {
 }
 
 .jumbotron {
-  background-color: lightblue;
+  /* background-color: lightblue; */
   margin-bottom: 10px;
 }
 

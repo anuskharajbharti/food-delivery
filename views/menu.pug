@@ -8,7 +8,7 @@ block content
         .menu-item  
             .text
                 h3= item.name
-                p= item.description
+                //- p= item.description
                 p Price: $#{item.price.toFixed(2)}
                 a(href=item.url) Buy
             img(src=`/images/${item.image}.jpg`) 

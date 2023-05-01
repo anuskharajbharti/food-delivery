@@ -4,9 +4,10 @@
   list-style: none;
 }
 
+/* menu */
 .menu {
   /* display: flex; */
-  width: 70%;
+  width: 60%;
   margin-inline: auto;
 }
 
@@ -38,6 +39,7 @@
 .menu img {
   width: 100px;
 }
+/* menu */
 
 /* cart */
 .container {

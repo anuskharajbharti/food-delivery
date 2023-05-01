@@ -13,7 +13,6 @@ router.get("/menu", category_controller.menu);
 router.get("/menu/:id", category_controller.item_detail);
 
 // item add a item to cart
-// form(method="POST" action=`/menu/${item._id}`)
 router.post("/menu/:id", category_controller.cart);
 
 router.post("/cart/checkout", category_controller.checkout);
