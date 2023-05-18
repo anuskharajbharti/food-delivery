@@ -102,3 +102,14 @@
   margin-inline: auto;
 }
 /* chekcout */
+
+.red {
+  color: #f64547;
+  line-height: 1.6;
+  font-size: 3.3rem;
+}
+.blue {
+  color: #75c7fb;
+  line-height: 1.6;
+  font-size: 3.3rem;
+}

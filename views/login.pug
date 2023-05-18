@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title Dine Deliver - Login
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+  body
+
+    .container
+      .row.justify-content-center
+        .col-md-6
+          .card.mt-5
+            .card-header
+              h3.text-center Login to Dine Deliver
+            .card-body
+              form(action='/login', method='POST')
+                .form-group
+                  label(for='email') Email
+                  input#email.form-control(type='email', name='email', placeholder='Enter your email', required)
+                .form-group
+                  label(for='password') Password
+                  input#password.form-control(type='password', name='password', placeholder='Enter your password', required)
+                button.btn.btn-primary.btn-block(type='submit') Login
+              .text-center.mt-3
+                p Don't have an account? 
+                a(href='/signup') Sign up here
+                br
+                a(href="/") back to home
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')

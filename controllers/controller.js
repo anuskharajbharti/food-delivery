@@ -1,5 +1,8 @@
 const Category = require("../models/category");
 const MenuItem = require("../models/menuItem");
+const User = require("../models/user");
+// const passport = require("passport");
+// const { body, validationResult } = require("express-validator");
 
 exports.home_page = (req, res, next) => {
   Category.find()
@@ -9,6 +12,7 @@ exports.home_page = (req, res, next) => {
       res.render("index", {
         title: "Food Delivery App",
         categories: list_category,
+        user: req.user,
       });
     });
 };
@@ -46,4 +50,32 @@ exports.cart = (req, res, next) => {
 
 exports.checkout = (req, res, next) => {
   res.render("checkout");
+};
+
+exports.signup = async (req, res) => {
+  const { name, email, password, confirmPassword } = req.body;
+
+  try {
+    // Check if the password and confirm password match
+    if (password !== confirmPassword) {
+      return res
+        .status(400)
+        .json({ error: "Password and Confirm Password do not match" });
+    }
+
+    // Create a new user instance
+    const newUser = new User({
+      name,
+      email,
+      password,
+    });
+
+    // Save the user to the database
+    const savedUser = await newUser.save();
+    res.redirect("/");
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while signing up the user" });
+  }
 };
