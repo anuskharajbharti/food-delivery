@@ -45,14 +45,6 @@ passport.use(
     try {
       const user = await User.findOne({ email: email });
 
-      // const user = {
-      //   _id: { $oid: "6466740c9384e52d60ad7ca4" },
-      //   name: "Poetry",
-      //   email: "risfggfjgsaj0703@gmail.com",
-      //   password: "123",
-      //   __v: { $numberInt: "0" },
-      // };
-
       if (!user) {
         return done(null, false, { message: "Incorrect Username" });
       }

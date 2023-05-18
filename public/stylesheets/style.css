@@ -6,7 +6,6 @@
 
 /* menu */
 .menu {
-  /* display: flex; */
   width: 60%;
   margin-inline: auto;
 }
@@ -18,10 +17,8 @@
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-between;
   justify-items: space-betwenn;
-  /* align-items: flex-start; */
 }
 
 .menu .menu-item h3 {
